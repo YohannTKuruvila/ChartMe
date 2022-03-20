@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 
 export default function App() {
   const [email, setEmail] = useState('');
@@ -8,6 +9,10 @@ export default function App() {
   
 
   return (
+    <NavigationContainer>
+
+    
+    
     <View style={styles.container}>
 
       <View style={styles.titleText}>
@@ -41,7 +46,8 @@ export default function App() {
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity> */}
 
-    </View>   
+    </View>
+    </NavigationContainer>
   );
 }
 
