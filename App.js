@@ -1,14 +1,10 @@
 import { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import Login from "./components/Login";
 import Home from "./components/Home";
+import Record from "./components/Record";
+import RecordOptions from "./components/RecordOptions";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
@@ -21,9 +17,10 @@ class App extends Component {
             name="Login"
             component={Login}
             options={{ headerShown: false }}
-            navigator={navigator}
           />
-          <Stack.Screen name="Home" component={Home} navigator={navigator} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="Record" component={Record} />
+          <Stack.Screen name="RecordOptions" component={RecordOptions} />
         </Stack.Navigator>
       </NavigationContainer>
     );

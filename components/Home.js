@@ -7,31 +7,31 @@ import {
   TouchableOpacity,
   SafeAreaView,
   StatusBar,
-  FlatList
+  FlatList,
 } from "react-native";
 
-const Home = () => {
+const Home = ({ navigation }) => {
   return (
-    
     <View style={styles.container}>
       <Text style={styles.titleText}>Patient Summary</Text>
 
-      <FlatList data={[
-        {key: 'Patient Name Here'},
-        {key: 'Blood Type'},
-        {key: 'Allergies'},
-        {key: 'Current Medications'},
-        {key: 'Address'},
-        {key: 'Pre-existing Conditions'},
-        {key: 'Organ Donor'},
-        {key: 'Emergency Contact'},
-      ]}
-      renderItem={({item}) => <Text style={styles.item}>{item.key}</Text>}
+      <FlatList
+        data={[
+          { key: "Patient Name Here" },
+          { key: "Blood Type" },
+          { key: "Allergies" },
+          { key: "Current Medications" },
+          { key: "Address" },
+          { key: "Pre-existing Conditions" },
+          { key: "Organ Donor" },
+          { key: "Emergency Contact" },
+        ]}
+        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
       />
 
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("")}
+        onPress={() => navigation.navigate("RecordOptions")}
       >
         <Text style={styles.loginText}>View All Records </Text>
       </TouchableOpacity>
