@@ -1,71 +1,48 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, TextInput, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { Component } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+} from "react-native";
+import { NavigationContainer, StackActions } from "@react-navigation/native";
+import Login from "./components/Login";
+import Home from "./components/Home";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+const Stack = createNativeStackNavigator();
 
-export default function App() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  
-
-  return (
-    <NavigationContainer>
-
-    
-    
-    <View style={styles.container}>
-
-      <View style={styles.titleText}>
-        <Text style={{color: 'white'}}>ChartMe</Text>
-      </View>      
-
-      <View style={styles.inputView}>
-      <TextInput
-        style={styles.TextInput}
-        placeholder = "Email:"
-        placeholderTextColor="#0094FF"
-        onChangeText={(email) => setEmail(email)}
-      />
-    </View>
-
-    <View style={styles.inputView}>
-    <TextInput
-      style={styles.TextInput}
-      placeholder="Password:"
-      placeholderTextColor="#0094FF"
-      secureTextEntry={true}
-      onChangeText={(password) => setPassword(password)}
-      />
-      </View>
-{/* 
-      <TouchableOpacity>
-        <Text style={styles.btn_forgot}>Forgot Password?</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.loginBtn}>
-        <Text style={styles.loginText}>LOGIN</Text>
-      </TouchableOpacity> */}
-
-    </View>
-    </NavigationContainer>
-  );
+class App extends Component {
+  render() {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Login">
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{ headerShown: false }}
+            navigator={navigator}
+          />
+          <Stack.Screen name="Home" component={Home} navigator={navigator} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0094FF',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#0094FF",
+    alignItems: "center",
+    justifyContent: "center",
   },
-  btn_forgot:{
-    
+  btn_forgot: {},
+  titleText: {
+    justifyContent: "center",
+    marginBottom: 40,
   },
-  titleText:{
-    justifyContent: 'center',
-    marginBottom: 40,        
-  },
-  inputView:{
+  inputView: {
     backgroundColor: "#FFFFFF",
     borderRadius: 15,
     width: "70%",
@@ -79,5 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     alignItems: "center",
-  }
+  },
 });
+
+export default App;
