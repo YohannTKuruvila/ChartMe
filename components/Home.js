@@ -28,6 +28,7 @@ const Home = ({ navigation }) => {
         ]}
         renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
       />
+      
 
       <TouchableOpacity
         style={styles.loginBtn}
@@ -35,6 +36,7 @@ const Home = ({ navigation }) => {
       >
         <Text style={styles.loginText}>View All Records </Text>
       </TouchableOpacity>
+      
     </View>
   );
 };
