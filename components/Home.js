@@ -15,19 +15,58 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.titleText}>Patient Summary</Text>
 
-      <FlatList
-        data={[
-          { key: "Patient Name Here" },
-          { key: "Blood Type" },
-          { key: "Allergies" },
-          { key: "Current Medications" },
-          { key: "Address" },
-          { key: "Pre-existing Conditions" },
-          { key: "Organ Donor" },
-          { key: "Emergency Contact" },
-        ]}
-        renderItem={({ item }) => <Text style={styles.item}>{item.key}</Text>}
-      />
+      <View style={styles.innerContainer}>
+        <Text style={styles.headingText}>Patient Name</Text>
+        <View style={styles.row}>
+          <Text>
+            Danil Ishutin
+          </Text>
+        </View>        
+        <Text style={styles.headingText}>Blood Type</Text>
+        <View style={styles.row}>
+          <Text>
+            O
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Allergies</Text>
+        <View style={styles.row}>
+          <Text>
+            Peanuts
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Current Medication</Text>
+        <View style={styles.row}>
+          <Text>
+            Oxycotin
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Address</Text>
+        <View style={styles.row}>
+          <Text>
+            1430 Trafalgar Road
+            Oakville, ON, CA
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Pre-Existing Conditions</Text>
+        <View style={styles.row}>
+          <Text>
+            None
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Organ Donor</Text>
+        <View style={styles.row}>
+          <Text>
+            Yes
+          </Text>
+        </View>
+        <Text style={styles.headingText}>Emergency Contact</Text>
+        <View style={styles.row}>
+          <Text>
+            Jamjam, 4161234567
+          </Text>
+        </View>
+      </View>
+      
 
       <TouchableOpacity
         style={styles.loginBtn}
@@ -45,6 +84,25 @@ const styles = StyleSheet.create({
     backgroundColor: "#0094FF",
     alignItems: "center",
     justifyContent: "center",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    flexWrap: "wrap",
+    marginVertical: 1,
+    marginLeft: 15,
+  },
+  innerContainer: {
+    flex: 1,
+    backgroundColor: "white",
+    width: "90%",
+    borderRadius: 25,
+    marginBottom: 20,
+  },
+  headingText: {
+    fontSize: 25,
+    color: "#0094FF",
+    margin: 15,
   },
   loginBtn: {
     width: "60%",

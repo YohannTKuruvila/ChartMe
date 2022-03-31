@@ -47,6 +47,13 @@ const Login = ({ navigation }) => {
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate("SignUp")}
+      >
+        <Text style={styles.loginText}>Create Account</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -87,14 +94,13 @@ const styles = StyleSheet.create({
     height: 40,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 25,
-    marginBottom: 30,
+    marginTop: 10,
 
-    shadowColor: "rgba(46, 45, 49, 0.8)",
-    shadowOpacity: 1.5,
-    elevation: 8,
-    shadowRadius: 20,
-    shadowOffset: { width: 1, height: 15 },
+    // shadowColor: "rgba(46, 45, 49, 0.8)",
+    // shadowOpacity: 1,
+    // elevation: 8,
+    // shadowRadius: 20,
+    // shadowOffset: { width: 1, height: 15 },
   },
   loginText: {
     fontSize: 21,
