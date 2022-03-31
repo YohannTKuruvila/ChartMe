@@ -74,6 +74,7 @@ const Home = ({ navigation }) => {
       >
         <Text style={styles.loginText}>View All Records </Text>
       </TouchableOpacity>
+      
     </View>
   );
 };
