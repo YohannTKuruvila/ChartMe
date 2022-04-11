@@ -47,11 +47,19 @@ const Login = ({ navigation }) => {
       >
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
+
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => navigation.navigate("SignUp")}
       >
-        <Text style={styles.loginText}>Create Account</Text>
+        <Text style={styles.loginText}>Create Patient Account</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.loginBtn}
+        onPress={() => navigation.navigate("PractitionerSignUp")}
+      >
+        <Text style={styles.loginText}>Create Practitioner Account</Text>
       </TouchableOpacity>
     </View>
   );

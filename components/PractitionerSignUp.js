@@ -8,12 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const SignUp = ({ navigation }) => {
+const PractitionerSignUp = ({ navigation }) => {
   const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
-  const [emergency, setEmergency] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState("");
+  const [license, setLicense] = useState("");
 
   return (
     <View style={styles.container}>
@@ -52,7 +52,7 @@ const SignUp = ({ navigation }) => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Address:"
+          placeholder="Main Practice Address:"
           placeholderTextColor="#0094FF"
           onChangeText={(address) => setAddress(address)}
         />
@@ -61,9 +61,9 @@ const SignUp = ({ navigation }) => {
       <View style={styles.inputView}>
         <TextInput
           style={styles.TextInput}
-          placeholder="Emergency Contact:"
+          placeholder="Medical License #:"
           placeholderTextColor="#0094FF"
-          onChangeText={(emergency) => setEmergency(emergency)}
+          onChangeText={(license) => setLicense(license)}
         />
       </View>
 
@@ -125,4 +125,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default PractitionerSignUp;
