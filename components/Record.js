@@ -1,7 +1,23 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import {
+  useFonts,
+  BalooChettan2_400Regular,
+  BalooChettan2_500Medium,
+  BalooChettan2_600SemiBold,
+  BalooChettan2_700Bold,
+  BalooChettan2_800ExtraBold,
+} from "@expo-google-fonts/baloo-chettan-2";
 
 const Record = () => {
+  let [fontsLoaded] = useFonts({
+    BalooChettan2_400Regular,
+    BalooChettan2_500Medium,
+    BalooChettan2_600SemiBold,
+    BalooChettan2_700Bold,
+    BalooChettan2_800ExtraBold,
+  });
+
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Patient Records</Text>
@@ -75,6 +91,7 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: 50,
+    fontFamily: "baloo",
     color: "white",
     justifyContent: "center",
     marginBottom: 40,

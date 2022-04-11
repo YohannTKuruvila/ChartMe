@@ -9,11 +9,43 @@ import {
   StatusBar,
   FlatList,
 } from "react-native";
+import {
+  useFonts,
+  BalooChettan2_400Regular,
+  BalooChettan2_500Medium,
+  BalooChettan2_600SemiBold,
+  BalooChettan2_700Bold,
+  BalooChettan2_800ExtraBold,
+} from "@expo-google-fonts/baloo-chettan-2";
+import {
+  //useFonts,
+  OpenSans_300Light,
+  OpenSans_400Regular,
+  OpenSans_500Medium,
+  OpenSans_600SemiBold,
+  OpenSans_700Bold,
+  OpenSans_800ExtraBold,
+  OpenSans_300Light_Italic,
+  OpenSans_400Regular_Italic,
+  OpenSans_500Medium_Italic,
+  OpenSans_600SemiBold_Italic,
+  OpenSans_700Bold_Italic,
+  OpenSans_800ExtraBold_Italic,
+} from "@expo-google-fonts/open-sans";
 
 const Home = ({ navigation }) => {
+  let [fontsLoaded] = useFonts({
+    OpenSans_500Medium,
+    OpenSans_800ExtraBold,
+    BalooChettan2_500Medium,
+    BalooChettan2_600SemiBold,
+    BalooChettan2_700Bold,
+    BalooChettan2_800ExtraBold,
+  });
+
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Patient Summary</Text>
+      <Text style={styles.titleText}>PATIENT SUMMARY</Text>
 
       <FlatList
         data={[
@@ -67,10 +99,14 @@ const styles = StyleSheet.create({
     color: "white",
   },
   titleText: {
-    fontSize: 50,
+    fontSize: 40,
     color: "white",
     justifyContent: "center",
     marginBottom: 40,
+    fontFamily: "BalooChettan2_700Bold",
+  },
+  item: {
+    fontFamily: "OpenSans_800ExtraBold",
   },
 });
 
