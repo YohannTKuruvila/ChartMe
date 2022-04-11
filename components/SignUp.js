@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const Login = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,6 +16,14 @@ const Login = ({ navigation }) => {
     <View style={styles.container}>
       <View>
         <Text style={styles.titleText}>ChartMe</Text>
+      </View>
+      <View style={styles.inputView}>
+        <TextInput
+          style={styles.TextInput}
+          placeholder="Name:"
+          placeholderTextColor="#0094FF"
+          onChangeText={(email) => setEmail(email)}
+        />
       </View>
 
       <View style={styles.inputView}>
@@ -43,15 +51,9 @@ const Login = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("Submit")}
       >
         <Text style={styles.loginText}>Login</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("SignUp")}
-      >
-        <Text style={styles.loginText}>Create Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -94,12 +96,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-
-    // shadowColor: "rgba(46, 45, 49, 0.8)",
-    // shadowOpacity: 1,
-    // elevation: 8,
-    // shadowRadius: 20,
-    // shadowOffset: { width: 1, height: 15 },
   },
   loginText: {
     fontSize: 21,
@@ -107,4 +103,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default SignUp;
