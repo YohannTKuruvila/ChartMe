@@ -12,12 +12,21 @@ const RecordOptions = ({ navigation }) => {
         >
           <Text style={styles.btnText}>Medical</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate("Record")}
+        >
           <Text style={styles.btnText}>Dental</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigation.navigate("Record")}
+        >
           <Text style={styles.btnText}>Optometry</Text>
         </TouchableOpacity>
+
       </View>
     </View>
   );
