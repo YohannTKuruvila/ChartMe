@@ -8,6 +8,7 @@ import RecordOptions from "./components/RecordOptions";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SignUp from "./components/Signup";
 import PractitionerSignUp from "./components/PractitionerSignUp";
+import AddRecord from "./components/AddRecord";
 const Stack = createNativeStackNavigator();
 
 class App extends Component {
@@ -25,6 +26,8 @@ class App extends Component {
           <Stack.Screen name="PractitionerSignUp" component={PractitionerSignUp} />
           <Stack.Screen name="Record" component={Record} />
           <Stack.Screen name="RecordOptions" component={RecordOptions} />
+          <Stack.Screen name="AddRecord" component={AddRecord} />
+
         </Stack.Navigator>
       </NavigationContainer>
     );

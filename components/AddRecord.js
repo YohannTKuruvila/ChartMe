@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-const Record = ({ navigation }) => {
+const AddRecord = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titleText}>Patient Records</Text>
@@ -58,10 +58,11 @@ const Record = ({ navigation }) => {
       </View>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("AddRecord")}
+        onPress={() => navigation.navigate("Record")}
       >
-        <Text style={styles.loginText}>Add Record</Text>
+        <Text style={styles.loginText}>Submit</Text>
       </TouchableOpacity>
+      
     </View>
   );
 };
@@ -127,4 +128,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Record;
+export default AddRecord;

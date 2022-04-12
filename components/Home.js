@@ -66,13 +66,12 @@ const Home = ({ navigation }) => {
           </Text>
         </View>
       </View>
-      
 
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => navigation.navigate("RecordOptions")}
       >
-        <Text style={styles.loginText}>View All Records </Text>
+        <Text style={styles.loginText}>View Records </Text>
       </TouchableOpacity>
       
     </View>
