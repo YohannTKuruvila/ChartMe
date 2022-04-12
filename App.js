@@ -6,7 +6,7 @@ import Home from "./components/Home";
 import Record from "./components/Record";
 import RecordOptions from "./components/RecordOptions";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SignUp from "./components/Signup";
+import SignUp from "./components/SignUp";
 import PractitionerSignUp from "./components/PractitionerSignUp";
 const Stack = createNativeStackNavigator();
 
@@ -22,7 +22,10 @@ class App extends Component {
           />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="PractitionerSignUp" component={PractitionerSignUp} />
+          <Stack.Screen
+            name="PractitionerSignUp"
+            component={PractitionerSignUp}
+          />
           <Stack.Screen name="Record" component={Record} />
           <Stack.Screen name="RecordOptions" component={RecordOptions} />
         </Stack.Navigator>

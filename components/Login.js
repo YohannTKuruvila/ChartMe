@@ -1,4 +1,4 @@
-import { StatusBar } from "expo-status-bar";
+import Firebase from "../api/firebaseConfig";
 import { React, Component, useState } from "react";
 import {
   StyleSheet,
@@ -7,10 +7,25 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth();
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const onLogIn = () => {
+    try {
+      if (email !== "" && password !== "") {
+        signInWithEmailAndPassword(auth, email, password).then(() => {
+          navigation.navigate("Home");
+        });
+      }
+    } catch (error) {
+      //console.log(`Sign in error ${error}`);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -41,10 +56,7 @@ const Login = ({ navigation }) => {
         <Text style={styles.btn_forgot}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <TouchableOpacity style={styles.loginBtn} onPress={() => onLogIn()}>
         <Text style={styles.loginText}>Login</Text>
       </TouchableOpacity>
 
