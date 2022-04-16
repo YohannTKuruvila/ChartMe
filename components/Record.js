@@ -1,95 +1,122 @@
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import firebase from "../api/firebaseConfig";
+import { React, useState, Component, useEffect } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  FlatList,
+} from "react-native";
+import toDate from "firebase/compat/app";
+import { route, navigation } from "react-native";
 
-const Record = ({ navigation }) => {
+import { getAuth } from "firebase/auth";
+//import "firebase/compat/firestore";
+
+function Record(route, navigation) {
+  const [records, setRecords] = useState([]);
+
+  const auth = getAuth();
+  const db = firebase.firestore();
+  const userID = auth.currentUser.uid;
+  //const { data } = route.params.data;
+  useEffect(() => {
+    const records = [];
+    const subscriber = db
+      .collection("patients")
+      .doc(userID)
+      .collection("medical")
+      .onSnapshot((querySnapshot) => {
+        querySnapshot.forEach((documentSnapshot) => {
+          records.push({
+            ...documentSnapshot.data(),
+            key: documentSnapshot.id,
+          });
+        });
+        setRecords(records);
+      });
+    return () => subscriber();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.titleText}>Patient Records</Text>
-      
-      <View style={styles.innerContainer}>
-        <Text style={styles.headingText}>2022/04/22 - Surgery</Text>
-        <View style={styles.row}>
-          <View style={styles.bullet}>
-            <Text>{"\u2022" + " "}</Text>
-          </View>
-          <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
+    <FlatList
+      data={records}
+      renderItem={({ item }) => (
+        <View style={styles.container}>
+          <View style={styles.innerContainer}>
+            <Text style={styles.headingText}>
+              {new Date(item.date.seconds * 1000).toLocaleDateString("en-US")}
             </Text>
+            <Text style={styles.headingText}>{item.title}</Text>
+            <View style={styles.row}>
+              <View style={styles.bullet}>
+                <Text>{"\u2022" + " "}</Text>
+              </View>
+              <View style={styles.bulletText}>
+                <Text style={styles.descText}>{item.description}</Text>
+              </View>
+            </View>
           </View>
+          {/* <TouchableOpacity
+            style={styles.loginBtn}
+            onPress={() => navigation.navigate("AddRecord")}
+          >
+            <Text style={styles.loginText}>Add Record</Text>
+          </TouchableOpacity> */}
         </View>
-        <Text style={styles.headingText}>2022/02/20 - Pre Op</Text>
-        <View style={styles.row}>
-          <View style={styles.bullet}>
-            <Text>{"\u2022" + " "}</Text>
-          </View>
-          <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Text>
-          </View>
-        </View>
-        <Text style={styles.headingText}>2022/01/12 - Check Up</Text>
-        <View style={styles.row}>
-          <View style={styles.bullet}>
-            <Text>{"\u2022" + " "}</Text>
-          </View>
-          <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Text>
-          </View>
-        </View>
-      </View>
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("AddRecord")}
-      >
-        <Text style={styles.loginText}>Add Record</Text>
-      </TouchableOpacity>
-    </View>
+      )}
+    />
   );
-};
+}
+
+class ShowRecords extends Component {
+  constructor() {
+    super();
+    this.dbRef = firebase.firestore();
+    this.state = {
+      records: [],
+    };
+  }
+  render() {
+    return (
+      <SafeAreaView style={styles.container}>
+        <Text style={styles.titleText}>Medical Records</Text>
+        <Record />
+      </SafeAreaView>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: "column",
     backgroundColor: "#0094FF",
     alignItems: "center",
+    alignContent: "center",
     justifyContent: "center",
   },
   innerContainer: {
-    flex: 1,
     backgroundColor: "white",
-    width: "90%",
+    width: 330,
     borderRadius: 25,
     marginBottom: 20,
   },
   titleText: {
-    fontSize: 50,
-    color: "white",
+    fontSize: 45,
+    color: "black",
     justifyContent: "center",
     marginBottom: 40,
+    marginTop: 40,
+    fontWeight: "bold",
   },
   headingText: {
     fontSize: 25,
     color: "#0094FF",
-    margin: 15,
+    marginLeft: 10,
+    marginTop: -3,
+    //paddingTop: 10,
   },
   row: {
     flexDirection: "row",
@@ -125,6 +152,10 @@ const styles = StyleSheet.create({
   bulletText: {
     flex: 1,
   },
+  descText: {
+    margin: 10,
+    fontSize: 20,
+  },
 });
 
-export default Record;
+export default ShowRecords;

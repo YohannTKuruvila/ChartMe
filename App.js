@@ -27,10 +27,9 @@ class App extends Component {
             name="PractitionerSignUp"
             component={PractitionerSignUp}
           />
-          <Stack.Screen name="Record" component={Record} />
           <Stack.Screen name="RecordOptions" component={RecordOptions} />
+          <Stack.Screen name="Record" component={Record} />
           <Stack.Screen name="AddRecord" component={AddRecord} />
-
         </Stack.Navigator>
       </NavigationContainer>
     );

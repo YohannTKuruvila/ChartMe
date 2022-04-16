@@ -61,17 +61,17 @@ const Login = ({ navigation }) => {
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.loginBtn}
+        style={styles.signUpBtn}
         onPress={() => navigation.navigate("SignUp")}
       >
-        <Text style={styles.loginText}>Create Patient Account</Text>
+        <Text style={styles.signUpText}>Create Patient Account</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
-        style={styles.loginBtn}
+        style={styles.signUpBtn}
         onPress={() => navigation.navigate("PractitionerSignUp")}
       >
-        <Text style={styles.loginText}>Create Practitioner Account</Text>
+        <Text style={styles.signUpText}>Create Practitioner Account</Text>
       </TouchableOpacity>
     </View>
   );
@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
   inputView: {
     backgroundColor: "#FFFFFF",
     borderRadius: 15,
-    width: "70%",
+    width: "80%",
     height: 45,
     marginBottom: 20,
     // alignItems: "center",
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   loginBtn: {
-    width: "60%",
-    backgroundColor: "black",
+    width: "80%",
+    backgroundColor: "white",
     borderRadius: 10,
     height: 40,
     alignItems: "center",
@@ -121,9 +121,22 @@ const styles = StyleSheet.create({
     // shadowRadius: 20,
     // shadowOffset: { width: 1, height: 15 },
   },
-  loginText: {
+  signUpBtn: {
+    width: "80%",
+    backgroundColor: "black",
+    borderRadius: 10,
+    height: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+  },
+  signUpText: {
     fontSize: 21,
     color: "white",
+  },
+  loginText: {
+    fontSize: 21,
+    color: "black",
   },
 });
 

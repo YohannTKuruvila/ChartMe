@@ -1,68 +1,89 @@
-import React from "react";
+import firebaseApp from "../api/firebaseConfig";
+import firebase from "firebase/compat/app";
+import { React, useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import { getAuth } from "firebase/auth";
+import DropDownPicker from "react-native-dropdown-picker";
+import "firebase/compat/firestore";
+
+const auth = getAuth();
+const db = firebaseApp.firestore();
 
 const AddRecord = ({ navigation }) => {
+  const [patientId, setPatientId] = useState("");
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: "Medical", value: "medical" },
+    { label: "Dental", value: "dental" },
+    { label: "Optometry", value: "optometry" },
+  ]);
+
+  const onSubmitRecord = () => {
+    if (patientId !== "" && title !== "" && description !== "") {
+      db.collection("patients")
+        .doc(patientId)
+        .collection(type)
+        .add({
+          date: firebase.firestore.FieldValue.serverTimestamp(),
+          title: title,
+          description: description,
+        })
+        .then(() => {
+          navigation.navigate("Home");
+        });
+    }
+  };
+
   return (
     <View style={styles.container}>
-      <Text style={styles.titleText}>Patient Records</Text>
-      
+      <Text style={styles.titleText}>Add Patient Record</Text>
+
       <View style={styles.innerContainer}>
-        <Text style={styles.headingText}>2022/04/22 - Surgery</Text>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          onChangeValue={(type) => setType(type)}
+        />
+        <TextInput
+          style={styles.headingText}
+          placeholder="Patient Id..."
+          onChangeText={(patientId) => setPatientId(patientId)}
+        ></TextInput>
+        <TextInput
+          style={styles.headingText}
+          placeholder="Record title..."
+          onChangeText={(title) => setTitle(title)}
+        ></TextInput>
         <View style={styles.row}>
           <View style={styles.bullet}>
             <Text>{"\u2022" + " "}</Text>
           </View>
           <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Text>
-          </View>
-        </View>
-        <Text style={styles.headingText}>2022/02/20 - Pre Op</Text>
-        <View style={styles.row}>
-          <View style={styles.bullet}>
-            <Text>{"\u2022" + " "}</Text>
-          </View>
-          <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Text>
-          </View>
-        </View>
-        <Text style={styles.headingText}>2022/01/12 - Check Up</Text>
-        <View style={styles.row}>
-          <View style={styles.bullet}>
-            <Text>{"\u2022" + " "}</Text>
-          </View>
-          <View style={styles.bulletText}>
-            <Text>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur.
-            </Text>
+            <TextInput
+              multiline={true}
+              placeholder="Record description..."
+              placeholderTextColor={"grey"}
+              onChangeText={(description) => setDescription(description)}
+            ></TextInput>
           </View>
         </View>
       </View>
       <TouchableOpacity
         style={styles.loginBtn}
-        onPress={() => navigation.navigate("Record")}
+        onPress={() => onSubmitRecord()}
       >
         <Text style={styles.loginText}>Submit</Text>
       </TouchableOpacity>
-      
     </View>
   );
 };
@@ -79,7 +100,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     width: "90%",
     borderRadius: 25,
-    marginBottom: 20,
+    marginBottom: 180,
   },
   titleText: {
     fontSize: 50,

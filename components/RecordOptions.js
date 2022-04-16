@@ -1,4 +1,4 @@
-import React from "react";
+import { React, Component } from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 const RecordOptions = ({ navigation }) => {
@@ -9,6 +9,17 @@ const RecordOptions = ({ navigation }) => {
         <TouchableOpacity
           style={styles.btn}
           onPress={() => navigation.navigate("Record")}
+        >
+          <Text style={styles.btnText}>All Records</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => {
+            navigation.navigate("Record", {
+              data: "medical",
+            });
+          }}
         >
           <Text style={styles.btnText}>Medical</Text>
         </TouchableOpacity>
@@ -26,7 +37,6 @@ const RecordOptions = ({ navigation }) => {
         >
           <Text style={styles.btnText}>Optometry</Text>
         </TouchableOpacity>
-
       </View>
     </View>
   );

@@ -1,3 +1,4 @@
+import firebaseApp from "../api/firebaseConfig";
 import { StatusBar } from "expo-status-bar";
 import { React, Component, useState } from "react";
 import {
@@ -7,6 +8,11 @@ import {
   View,
   TouchableOpacity,
 } from "react-native";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import "firebase/compat/firestore";
+
+const auth = getAuth();
+const db = firebaseApp.firestore();
 
 const PractitionerSignUp = ({ navigation }) => {
   const [name, setName] = useState("");
@@ -14,6 +20,28 @@ const PractitionerSignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [license, setLicense] = useState("");
+
+  const onSignUpPrac = () => {
+    try {
+      if (
+        name != "" &&
+        email !== "" &&
+        password !== "" &&
+        address !== "" &&
+        license !== ""
+      ) {
+        createUserWithEmailAndPassword(auth, email, password).then(() => {
+          db.collection("practitioners").doc(auth.currentUser.uid).set({
+            name: name,
+            email: email,
+            address: address,
+            license: license,
+            isDoc: true,
+          });
+        });
+      }
+    } catch (error) {}
+  };
 
   return (
     <View style={styles.container}>
@@ -71,10 +99,7 @@ const PractitionerSignUp = ({ navigation }) => {
         <Text style={styles.btn_forgot}>Forgot Password?</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <TouchableOpacity style={styles.loginBtn} onPress={() => onSignUpPrac()}>
         <Text style={styles.loginText}>Submit</Text>
       </TouchableOpacity>
     </View>

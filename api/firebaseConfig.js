@@ -1,5 +1,5 @@
-import * as firebase from "firebase/app";
-import "firebase/firestore";
+import firebase from "firebase/compat/app";
+import "firebase/compat/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -10,10 +10,10 @@ const firebaseConfig = {
   messagingSenderId: "253288683101",
   appId: "1:253288683101:web:28b58794849d46e70fdfb4",
 };
-let Firebase;
 
-if (firebase.getApps.length === 0) {
-  Firebase = firebase.initializeApp(firebaseConfig);
-}
+//if (firebase.apps.length === 0) {
+let firebaseApp = firebase.initializeApp(firebaseConfig);
+//}
 
-export default Firebase;
+const db = firebaseApp.firestore;
+export default firebaseApp;
